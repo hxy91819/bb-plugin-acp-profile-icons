@@ -6,14 +6,14 @@ A **BB-specific frontend plugin** that displays recognizable icons for ACP provi
 | --- | --- |
 | `acp-amp` | Full Amp wordmark, white on gray |
 | `acp-devin` | Devin mark |
-| `acp-codexl` | OpenAI mark |
+| `acp-codexl` | OpenAI mark, white on gray to distinguish native Codex |
 | `acp-kiro` | Kiro mark |
 | `acp-agy` | Antigravity mark |
 | `acp-copilot` | GitHub Copilot mark |
 | `acp-codebuddy` | CodeBuddy cat mark |
 | `acp-dsh` | DeepSeek whale mark |
 
-Other marks inherit BB's foreground color in light and dark themes; Amp uses a gray tile with white lettering.
+Other marks inherit BB's foreground color in light and dark themes; Amp and ACP Codex use gray tiles with white marks.
 
 ## Install
 
@@ -45,9 +45,9 @@ bb plugin disable acp-profile-icons
 
 ## How it works
 
-`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon`. The SVGs are bundled locally; except for Amp's gray-and-white tile, they inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
+`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon`. The SVGs are bundled locally; except for Amp's and ACP Codex's gray-and-white tiles, they inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
 
-For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or Amp's two-color SVG image). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
+For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or two-color SVG images for Amp and ACP Codex). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
 
 ## Icon design and verification
 

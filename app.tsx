@@ -35,7 +35,7 @@ const extraIcons = [
   },
   {
     providerId: "acp-codexl",
-    inner: `<path d="${CODEX_MARK}"/>`,
+    inner: `<rect width="24" height="24" rx="4" fill="#666"/><path d="${CODEX_MARK}" fill="white" transform="translate(3 3) scale(0.75)"/>`,
   },
   {
     providerId: "acp-kiro",
@@ -77,7 +77,7 @@ export default definePluginApp((app) => {
       // Override paint only, leaving React-owned elements intact on updates.
       style.textContent = masked
         .map(
-          (entry) => entry.providerId === "acp-amp" ? `span[data-provider-logo^="/api/v1/system/providers/acp-amp/logo"] {
+          (entry) => entry.providerId === "acp-amp" || entry.providerId === "acp-codexl" ? `span[data-provider-logo^="/api/v1/system/providers/${entry.providerId}/logo"] {
   mask-image: none !important;
   -webkit-mask-image: none !important;
   background-image: url("data:image/svg+xml,${encodeURIComponent(entry.svg)}") !important;

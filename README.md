@@ -49,6 +49,13 @@ bb plugin disable acp-profile-icons
 
 For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or Amp's two-color SVG image). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
 
+## Icon design and verification
+
+- Identify the provider and its brand before choosing artwork. Prefer the installed product's own assets or an attributable vector source; do not treat a host's placeholder icon as the brand logo. Record third-party sources in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- Preserve the recognizable **complete** mark at its final display size. Do not crop a wordmark to one letter or approximate a detailed mark with only a few paths. Inspect the original SVG's filled areas and cutouts before changing its fill or adding a mask; a second mask can hide the artwork entirely.
+- Use BB's monochrome foreground for ordinary marks. When a mark needs a background, keep the tile square in the 24×24 icon viewBox and use a neutral gray with legible lettering; do not substitute a black or colored tile for a gray one. Check optical size and spacing beside BB's built-in icons, not only the SVG dimensions.
+- After editing, run `npm run typecheck`, `bb plugin build .`, and `bb plugin reload acp-profile-icons`. Open the **actual** model picker in both light and dark themes, capture and inspect its icons, and check the Provider Usage panel if its CSS icon path changed. Compilation or a screenshot that has not been inspected is not visual verification.
+
 ## Develop
 
 ```sh

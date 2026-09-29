@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
-  "description": "Amp and Devin brand icons for ACP providers in BB.",
+  "description": "Brand icons for ACP providers in BB.",
   "license": "MIT",
   "author": "hxy91819",
   "repository": {
@@ -20,7 +20,7 @@
   },
   "bb": {
     "name": "ACP Profile Icons",
-    "description": "Amp and Devin brand icons in BB model pickers and provider controls.",
+    "description": "Brand icons for ACP providers in BB model pickers and provider controls.",
     "branding": {
       "icon": "Palette"
     },

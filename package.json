@@ -1,0 +1,43 @@
+{
+  "name": "bb-plugin-acp-profile-icons",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Amp and Devin brand icons for ACP providers in BB.",
+  "license": "MIT",
+  "author": "hxy91819",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hxy91819/bb-plugin-acp-profile-icons.git"
+  },
+  "homepage": "https://github.com/hxy91819/bb-plugin-acp-profile-icons",
+  "bugs": {
+    "url": "https://github.com/hxy91819/bb-plugin-acp-profile-icons/issues"
+  },
+  "engines": {
+    "bb": ">=0.42",
+    "bbPluginSdk": ">=0.4.47"
+  },
+  "bb": {
+    "name": "ACP Profile Icons",
+    "description": "Amp and Devin brand icons in BB model pickers and provider controls.",
+    "branding": {
+      "icon": "Palette"
+    },
+    "server": "./server.ts",
+    "app": "./app.tsx",
+    "skills": []
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "bb plugin build ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@get-bb/plugin-sdk": "0.4.47",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  }
+}

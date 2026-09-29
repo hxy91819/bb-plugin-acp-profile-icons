@@ -2,8 +2,8 @@ See recognizable brand marks when choosing models and viewing provider controls 
 
 ## What you get
 
-- Monochrome marks for `acp-amp`, `acp-devin`, `acp-codexl`, `acp-kiro`, `acp-agy`, `acp-copilot`, and `acp-codebuddy`.
-- BB's existing DeepSeek Harness mark for `acp-dsh`, in the same theme-aware style.
+- A gray tile with the full white Amp wordmark for `acp-amp` and monochrome marks for `acp-devin`, `acp-codexl`, `acp-kiro`, `acp-agy`, `acp-copilot`, and `acp-codebuddy` (cat mark).
+- DeepSeek's whale mark for `acp-dsh`, in the same theme-aware style.
 - Bundled SVG graphics that work without downloading remote images.
 
 ## How it works

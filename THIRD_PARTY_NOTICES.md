@@ -1,8 +1,11 @@
 # Third-party icon sources
 
-Kiro, Antigravity, GitHub Copilot, and CodeBuddy SVG paths are adapted from
+Kiro, Antigravity, GitHub Copilot, and DeepSeek SVG paths are adapted from
 [`lobehub/lobe-icons`](https://github.com/lobehub/lobe-icons), files
-`packages/static-svg/icons/{kiro,antigravity,githubcopilot,codebuddy}.svg`.
+`packages/static-svg/icons/{kiro,antigravity,githubcopilot,deepseek}.svg`.
+
+The CodeBuddy cat path is adapted from the locally installed
+`@tencent-ai/codebuddy-code/dist/web-ui/pwa-icon.svg`.
 
 MIT License
 

@@ -4,16 +4,16 @@ A **BB-specific frontend plugin** that displays recognizable icons for ACP provi
 
 | Provider ID | Icon |
 | --- | --- |
-| `acp-amp` | Amp letterform cropped from its wordmark |
+| `acp-amp` | Full Amp wordmark, white on gray |
 | `acp-devin` | Devin mark |
 | `acp-codexl` | OpenAI mark |
 | `acp-kiro` | Kiro mark |
 | `acp-agy` | Antigravity mark |
 | `acp-copilot` | GitHub Copilot mark |
-| `acp-codebuddy` | CodeBuddy mark |
-| `acp-dsh` | BB's existing DeepSeek Harness mark |
+| `acp-codebuddy` | CodeBuddy cat mark |
+| `acp-dsh` | DeepSeek whale mark |
 
-All marks inherit BB's foreground color in light and dark themes; this plugin adds no colored tiles.
+Other marks inherit BB's foreground color in light and dark themes; Amp uses a gray tile with white lettering.
 
 ## Install
 
@@ -45,9 +45,9 @@ bb plugin disable acp-profile-icons
 
 ## How it works
 
-`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon`. The SVGs are bundled locally and inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
+`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon`. The SVGs are bundled locally; except for Amp's gray-and-white tile, they inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
 
-For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies the same monochrome SVG masks. It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
+For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or Amp's two-color SVG image). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
 
 ## Develop
 
@@ -64,4 +64,4 @@ For an installed local checkout, rebuild and run `bb plugin reload acp-profile-i
 
 ## Attribution
 
-Plugin code is MIT licensed. The Kiro, Antigravity, GitHub Copilot, and CodeBuddy paths are adapted from [LobeHub lobe-icons](https://github.com/lobehub/lobe-icons) under its MIT license; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The CodexL mark comes from BB's Codex provider icon. Brand marks belong to their respective owners. This is an independent plugin, not an official product of those brands.
+Plugin code is MIT licensed. The Kiro, Antigravity, GitHub Copilot, and DeepSeek paths are adapted from [LobeHub lobe-icons](https://github.com/lobehub/lobe-icons) under its MIT license; the CodeBuddy cat path is adapted from the locally installed `@tencent-ai/codebuddy-code/dist/web-ui/pwa-icon.svg`. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The CodexL mark comes from BB's Codex provider icon. Brand marks belong to their respective owners. This is an independent plugin, not an official product of those brands.

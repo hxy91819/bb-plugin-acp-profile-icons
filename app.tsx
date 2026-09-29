@@ -27,7 +27,7 @@ const CODEBUDDY_CAT =
 const extraIcons = [
   {
     providerId: "acp-amp",
-    inner: `<rect x="0" y="2" width="24" height="20" rx="4" fill="#666"/><svg x="1" y="4" width="22" height="16" viewBox="0 0 281 143"><path d="${AMP_WORDMARK}" fill="white"/></svg>`,
+    inner: `<rect x="0" y="0" width="24" height="24" rx="4" fill="#666"/><svg x="1" y="4" width="22" height="16" viewBox="0 0 281 143"><path d="${AMP_WORDMARK}" fill="white"/></svg>`,
   },
   {
     providerId: "acp-devin",

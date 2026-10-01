@@ -2,7 +2,7 @@ See recognizable brand marks when choosing models and viewing provider controls 
 
 ## What you get
 
-- Gray tiles for `acp-amp` (full white wordmark) and `acp-codexl` (white OpenAI mark, distinct from native Codex); monochrome marks for `acp-devin`, `acp-kiro`, `acp-agy`, `acp-copilot`, and `acp-codebuddy` (cat mark).
+- A gray tile for `acp-codexl` (white OpenAI mark, distinct from native Codex); monochrome marks for `acp-amp` (full wordmark), `acp-devin`, `acp-kiro`, `acp-agy`, `acp-copilot`, and `acp-codebuddy` (cat mark).
 - DeepSeek's whale mark for `acp-dsh`, in the same theme-aware style.
 - Bundled SVG graphics that work without downloading remote images.
 

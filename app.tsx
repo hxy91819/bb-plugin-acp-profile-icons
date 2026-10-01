@@ -27,7 +27,7 @@ const CODEBUDDY_CAT =
 const extraIcons = [
   {
     providerId: "acp-amp",
-    inner: `<rect x="0" y="0" width="24" height="24" rx="4" fill="#666"/><svg x="1" y="4" width="22" height="16" viewBox="0 0 281 143"><path d="${AMP_WORDMARK}" fill="white"/></svg>`,
+    inner: `<svg x="1" y="4" width="22" height="16" viewBox="0 0 281 143"><path d="${AMP_WORDMARK}"/></svg>`,
   },
   {
     providerId: "acp-devin",
@@ -77,7 +77,7 @@ export default definePluginApp((app) => {
       // Override paint only, leaving React-owned elements intact on updates.
       style.textContent = masked
         .map(
-          (entry) => entry.providerId === "acp-amp" || entry.providerId === "acp-codexl" ? `span[data-provider-logo^="/api/v1/system/providers/${entry.providerId}/logo"] {
+          (entry) => entry.providerId === "acp-codexl" ? `span[data-provider-logo^="/api/v1/system/providers/${entry.providerId}/logo"] {
   mask-image: none !important;
   -webkit-mask-image: none !important;
   background-image: url("data:image/svg+xml,${encodeURIComponent(entry.svg)}") !important;

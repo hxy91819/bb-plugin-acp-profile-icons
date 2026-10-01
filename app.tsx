@@ -27,14 +27,22 @@ const CODEBUDDY_CAT =
 const AMP_LETTERING =
   `<svg x="0.5" y="6.95" width="23" height="10.1" viewBox="0 20 281 123.1"><path d="${AMP_WORDMARK}"/></svg>`;
 
-const extraIcons = [
+const DEVIN_SYMBOL =
+  `<svg x="2" y="2" width="20" height="20" viewBox="69.9 48.9 286.8 328.5"><path d="${DEVIN_MARK}"/></svg>`;
+
+const themeTile = (mark: string) =>
+  `<rect width="24" height="24" rx="4" fill="var(--foreground)"/><g fill="var(--background)">${mark}</g>`;
+
+const extraIcons: { providerId: string; inner: string; tileMark?: string }[] = [
   {
     providerId: "acp-amp",
-    inner: `<rect width="24" height="24" rx="4" fill="var(--foreground)"/><g fill="var(--background)">${AMP_LETTERING}</g>`,
+    inner: themeTile(AMP_LETTERING),
+    tileMark: AMP_LETTERING,
   },
   {
     providerId: "acp-devin",
-    inner: `<path d="${DEVIN_MARK}" transform="translate(0.35 0.3) scale(0.055)"/>`,
+    inner: themeTile(DEVIN_SYMBOL),
+    tileMark: DEVIN_SYMBOL,
   },
   {
     providerId: "acp-codexl",
@@ -68,6 +76,7 @@ const iconSvg = (inner: string) =>
 const masked = extraIcons.map((entry) => ({
   providerId: entry.providerId,
   svg: iconSvg(entry.inner),
+  tileMark: entry.tileMark,
 }));
 
 export default definePluginApp((app) => {
@@ -80,7 +89,7 @@ export default definePluginApp((app) => {
       // Override paint only, leaving React-owned elements intact on updates.
       style.textContent = masked
         .map(
-          (entry) => entry.providerId === "acp-amp" ? `span[data-provider-logo^="/api/v1/system/providers/acp-amp/logo"] {
+          (entry) => entry.tileMark ? `span[data-provider-logo^="/api/v1/system/providers/${entry.providerId}/logo"] {
   position: relative;
   mask-image: none !important;
   -webkit-mask-image: none !important;
@@ -88,13 +97,13 @@ export default definePluginApp((app) => {
   background-color: var(--foreground) !important;
   border-radius: 16.6667%;
 }
-span[data-provider-logo^="/api/v1/system/providers/acp-amp/logo"]::after {
+span[data-provider-logo^="/api/v1/system/providers/${entry.providerId}/logo"]::after {
   content: "";
   position: absolute;
   inset: 0;
   background-color: var(--background);
-  mask: url("data:image/svg+xml,${encodeURIComponent(iconSvg(AMP_LETTERING))}") center / contain no-repeat;
-  -webkit-mask: url("data:image/svg+xml,${encodeURIComponent(iconSvg(AMP_LETTERING))}") center / contain no-repeat;
+  mask: url("data:image/svg+xml,${encodeURIComponent(iconSvg(entry.tileMark))}") center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,${encodeURIComponent(iconSvg(entry.tileMark))}") center / contain no-repeat;
 }` : entry.providerId === "acp-codexl" ? `span[data-provider-logo^="/api/v1/system/providers/${entry.providerId}/logo"] {
   mask-image: none !important;
   -webkit-mask-image: none !important;

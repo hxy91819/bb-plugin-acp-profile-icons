@@ -5,7 +5,7 @@ A **BB-specific frontend plugin** that displays recognizable icons for ACP provi
 | Provider ID | Icon |
 | --- | --- |
 | `acp-amp` | Full Amp wordmark on a theme-aware square tile |
-| `acp-devin` | Official Devin symbol |
+| `acp-devin` | Enlarged official Devin symbol on a theme-aware square tile |
 | `acp-codexl` | OpenAI mark, white on gray to distinguish native Codex |
 | `acp-kiro` | Kiro mark |
 | `acp-agy` | Antigravity mark |
@@ -13,7 +13,7 @@ A **BB-specific frontend plugin** that displays recognizable icons for ACP provi
 | `acp-codebuddy` | CodeBuddy cat mark |
 | `acp-dsh` | DeepSeek whale mark |
 
-Amp uses BB’s theme foreground for its tile and theme background for its lettering, reversing their visual contrast across light and dark themes. Other ordinary marks inherit BB's foreground color; ACP Codex uses a gray tile with a white mark.
+Amp and Devin use BB’s theme foreground for their tiles and theme background for their marks, reversing their visual contrast across light and dark themes. Other ordinary marks inherit BB's foreground color; ACP Codex uses a gray tile with a white mark.
 
 ## Install
 
@@ -45,15 +45,17 @@ bb plugin disable acp-profile-icons
 
 ## How it works
 
-`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon` and `providerKind: "agent"`. The SVGs are bundled locally; Amp uses theme-aware contrasting colors and ACP Codex uses a gray-and-white tile; other marks inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
+`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon` and `providerKind: "agent"`. The SVGs are bundled locally; Amp and Devin use theme-aware contrasting colors and ACP Codex uses a gray-and-white tile; other marks inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
 
-For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or a theme-colored tile and lettering mask for Amp, or a two-color SVG image for ACP Codex). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
+For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or a theme-colored tile and mark mask for Amp and Devin, or a two-color SVG image for ACP Codex). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
 
 ## Icon design and verification
 
 - Identify the provider and its brand before choosing artwork. Prefer the installed product's own assets or an attributable vector source; do not treat a host's placeholder icon as the brand logo. Record third-party sources in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - Preserve the recognizable **complete** mark at its final display size. Do not crop a wordmark to one letter or approximate a detailed mark with only a few paths. Inspect the original SVG's filled areas and cutouts before changing its fill or adding a mask; a second mask can hide the artwork entirely.
-- Use BB's monochrome foreground for ordinary marks. Amp uses a square tile using BB’s foreground and background colors for contrasting lettering; maximize the complete wordmark's width with minimal side padding and trim only empty SVG margins. ACP Codex keeps its gray tile and white mark. Check optical size and spacing beside BB's built-in icons, not only the SVG dimensions.
+- Measure icons in **CSS pixels at the smallest actual display size** (currently 16 px in the model picker), independently of device pixel ratio. This project's small-icon threshold is **20 px or less**. After trimming empty SVG margins, use a contrasting square tile when the painted mark's shorter bounding-box dimension is below **75%** of the icon box, or its lettering/details remain hard to recognize at actual size. This is a project design threshold, not an external standard.
+- Fit the complete mark proportionally inside the tile; target an **80–85%** longest dimension for compact symbols (about 2 px padding per edge in a 24×24 viewBox). Wide wordmarks can use up to 96% width. Preserve all painted areas and cutouts. Amp and Devin use BB's `--foreground` for the tile and `--background` for the mark: dark tile/light mark in light themes, reversed contrast in dark themes. ACP Codex keeps its established gray tile and white mark.
+- Choose the variant using the smallest supported size and keep it consistent across provider surfaces. Verify at **16, 20 and 24 CSS px**, including a 1× pixel-density view and the actual model picker in both themes; compare optical weight beside built-in icons.
 - After editing, run `npm run typecheck`, `bb plugin build .`, and `bb plugin reload acp-profile-icons`. Open the **actual** model picker in both light and dark themes, capture and inspect its icons, and check the Provider Usage panel if its CSS icon path changed. Compilation or a screenshot that has not been inspected is not visual verification.
 
 ## Develop

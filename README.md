@@ -4,7 +4,7 @@ A **BB-specific frontend plugin** that displays recognizable icons for ACP provi
 
 | Provider ID | Icon |
 | --- | --- |
-| `acp-amp` | Full Amp wordmark, theme foreground |
+| `acp-amp` | Full Amp wordmark on a theme-aware square tile |
 | `acp-devin` | Official Devin symbol |
 | `acp-codexl` | OpenAI mark, white on gray to distinguish native Codex |
 | `acp-kiro` | Kiro mark |
@@ -13,7 +13,7 @@ A **BB-specific frontend plugin** that displays recognizable icons for ACP provi
 | `acp-codebuddy` | CodeBuddy cat mark |
 | `acp-dsh` | DeepSeek whale mark |
 
-Amp and the other ordinary marks inherit BB's foreground color in light and dark themes; ACP Codex uses a gray tile with a white mark.
+Amp uses BB’s theme foreground for its tile and theme background for its lettering, reversing their visual contrast across light and dark themes. Other ordinary marks inherit BB's foreground color; ACP Codex uses a gray tile with a white mark.
 
 ## Install
 
@@ -45,15 +45,15 @@ bb plugin disable acp-profile-icons
 
 ## How it works
 
-`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon` and `providerKind: "agent"`. The SVGs are bundled locally; except for ACP Codex's gray-and-white tile, they inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
+`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon` and `providerKind: "agent"`. The SVGs are bundled locally; Amp uses theme-aware contrasting colors and ACP Codex uses a gray-and-white tile; other marks inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
 
-For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or a two-color SVG image for ACP Codex). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
+For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or a theme-colored tile and lettering mask for Amp, or a two-color SVG image for ACP Codex). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
 
 ## Icon design and verification
 
 - Identify the provider and its brand before choosing artwork. Prefer the installed product's own assets or an attributable vector source; do not treat a host's placeholder icon as the brand logo. Record third-party sources in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - Preserve the recognizable **complete** mark at its final display size. Do not crop a wordmark to one letter or approximate a detailed mark with only a few paths. Inspect the original SVG's filled areas and cutouts before changing its fill or adding a mask; a second mask can hide the artwork entirely.
-- Use BB's monochrome foreground for ordinary marks, including the complete Amp wordmark without a fixed-color tile. When a mark needs a background, keep the tile square in the 24×24 icon viewBox and use a neutral gray with legible lettering; do not substitute a black or colored tile for a gray one. Check optical size and spacing beside BB's built-in icons, not only the SVG dimensions.
+- Use BB's monochrome foreground for ordinary marks. Amp uses a square tile using BB’s foreground and background colors for contrasting lettering; maximize the complete wordmark's width with minimal side padding and trim only empty SVG margins. ACP Codex keeps its gray tile and white mark. Check optical size and spacing beside BB's built-in icons, not only the SVG dimensions.
 - After editing, run `npm run typecheck`, `bb plugin build .`, and `bb plugin reload acp-profile-icons`. Open the **actual** model picker in both light and dark themes, capture and inspect its icons, and check the Provider Usage panel if its CSS icon path changed. Compilation or a screenshot that has not been inspected is not visual verification.
 
 ## Develop

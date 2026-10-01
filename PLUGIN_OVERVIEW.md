@@ -10,7 +10,7 @@ See recognizable brand marks when choosing models and viewing provider controls 
 
 The plugin uses BB's provider-icon extension. It changes presentation only: provider authentication, model selection, and agent execution stay with the configured ACP provider. Disabling the plugin restores BB's default icons.
 
-A scoped stylesheet also supplies matching logo masks and gray-tile images in the BB 0.42 Provider Usage panel.
+A scoped stylesheet also supplies matching theme-colored tiles, logo masks, and the ACP Codex gray-tile image in the BB 0.42 Provider Usage panel.
 
 ## Requirements
 

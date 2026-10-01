@@ -51,12 +51,63 @@ For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG mas
 
 ## Icon design and verification
 
-- Identify the provider and its brand before choosing artwork. Prefer the installed product's own assets or an attributable vector source; do not treat a host's placeholder icon as the brand logo. Record third-party sources in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-- Preserve the recognizable **complete** mark at its final display size. Do not crop a wordmark to one letter or approximate a detailed mark with only a few paths. Inspect the original SVG's filled areas and cutouts before changing its fill or adding a mask; a second mask can hide the artwork entirely.
-- Measure icons in **CSS pixels at the smallest actual display size** (currently 16 px in the model picker), independently of device pixel ratio. This project's small-icon threshold is **20 px or less**. After trimming empty SVG margins, use a contrasting square tile when the painted mark's shorter bounding-box dimension is below **75%** of the icon box, or its lettering/details remain hard to recognize at actual size. This is a project design threshold, not an external standard.
-- Fit the complete mark proportionally inside the tile; target an **80–85%** longest dimension for compact symbols (about 2 px padding per edge in a 24×24 viewBox). Wide wordmarks can use up to 96% width. Preserve all painted areas and cutouts. Amp and Devin use BB's `--foreground` for the tile and `--background` for the mark: dark tile/light mark in light themes, reversed contrast in dark themes. ACP Codex keeps its established gray tile and white mark.
-- Choose the variant using the smallest supported size and keep it consistent across provider surfaces. Verify at **16, 20 and 24 CSS px**, including a 1× pixel-density view and the actual model picker in both themes; compare optical weight beside built-in icons.
-- After editing, run `npm run typecheck`, `bb plugin build .`, and `bb plugin reload acp-profile-icons`. Open the **actual** model picker in both light and dark themes, capture and inspect its icons, and check the Provider Usage panel if its CSS icon path changed. Compilation or a screenshot that has not been inspected is not visual verification.
+This section is the authoritative visual specification for this plugin. The thresholds below are project design choices, not external standards.
+
+### Artwork and visible size
+
+Use the product's own asset or an attributable vector source, and record its source in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Preserve the complete recognizable mark, including its filled areas and cutouts. A host placeholder or a single-letter approximation is not a substitute for the brand mark.
+
+Measure the **painted artwork**, not just the SVG viewBox. Trim empty source margins, preserve proportions, and center the visible mark optically. Inspect SVG cutouts before applying a mask so the mask retains the complete artwork.
+
+Use **CSS pixels**, independently of screen pixel density or screenshot resolution. Measure the smallest actual provider surface; the current model picker displays icons at **16×16 CSS px**.
+
+### When to use a tile
+
+For icons displayed at **20 CSS px or less**, use a contrasting square tile when, after trimming empty margins:
+
+- the painted mark's shorter bounding-box dimension is below **75%** of the icon box; or
+- its wordmark, fine details, or overall shape remain hard to identify at the actual display size.
+
+Size alone does not require a tile. Clear, well-proportioned symbols can remain monochrome. A tile improves contrast and visual weight; it does not replace fitting the artwork correctly.
+
+Choose the treatment based on the smallest supported size, then keep it consistent across provider surfaces. This is a design decision for each provider, rather than an automatic switch at different sizes.
+
+### Theme colors, proportions, and spacing
+
+| Element | Target |
+| --- | --- |
+| Tile | Square in the 24×24 viewBox, with a consistent corner radius of 4 |
+| Compact symbol | Longest painted dimension **80–85%** of the tile; approximately 2 viewBox units of padding per edge |
+| Wide wordmark | Complete mark, up to **96%** of the tile width, with its original proportions |
+| Theme tile color | BB's `--foreground` |
+| Theme mark color | BB's `--background` |
+
+The theme tokens produce dark tiles with light marks in light themes and reversed contrast in dark themes. Use the product's actual palette rather than fixed black, white, gray, or an unrelated brand color for new theme-aware tiles. Apply the same colors to both the provider-icon extension and any Provider Usage CSS fallback.
+
+These proportions are starting points for visual review. Compare the icon beside BB's built-in icons at actual size, checking visual weight and balanced negative space. If a compact symbol feels crowded, reduce it within the target range instead of filling the tile edge to edge. If a wordmark remains unreadable, reconsider its display width or treatment rather than cropping it or stretching it.
+
+Current treatments:
+
+- **Amp:** complete wordmark on a theme-colored tile, with minimal horizontal padding.
+- **Devin:** complete official symbol on the same theme-colored tile, optically centered at approximately **83%** of tile height. The initial 92% fit was too crowded.
+- **ACP Codex:** retain its established gray tile and white OpenAI mark to distinguish it from native Codex.
+- **Other providers:** retain theme-aware monochrome marks while they remain recognizable at the smallest display size.
+
+### Visual verification
+
+After an icon change, run `npm run typecheck`, `bb plugin build .`, and `bb plugin reload acp-profile-icons`. Confirm that the installed plugin uses the changed checkout or commit.
+
+Inspect **16, 20 and 24 CSS px** sizes, including **1× pixel density** and the **actual model picker** in both light and dark themes. Capture screenshots and open them for visual inspection. Compare the complete provider row, not only a magnified standalone SVG.
+
+Check all of the following before delivery:
+
+- The complete mark is visible, with no clipped edges or hidden cutouts.
+- The mark is recognizable at actual size and has balanced spacing inside its tile.
+- Its visual weight fits the neighboring icons; neither excessive whitespace nor an oversized interior dominates the row.
+- Tile and mark colors match the active product theme, and theme switching updates them immediately.
+- The Provider Usage fallback matches the picker if its CSS path changed. If that provider has no visible Usage entry, report that limit and check the fallback styling separately.
+
+Compilation and DOM checks support verification; a screenshot that has not been opened and inspected does not establish visual quality.
 
 ## Develop
 

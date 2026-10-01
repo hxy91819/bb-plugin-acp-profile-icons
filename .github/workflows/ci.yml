@@ -22,7 +22,7 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run typecheck
       - run: npm audit
-      - run: npm exec --yes --package bb-app@0.42.1 -- bb plugin build .
+      - run: npm exec --yes --package bb-app@0.44.0 -- bb plugin build .
 
   secrets:
     runs-on: ubuntu-latest

@@ -5,7 +5,7 @@ A **BB-specific frontend plugin** that displays recognizable icons for ACP provi
 | Provider ID | Icon |
 | --- | --- |
 | `acp-amp` | Full Amp wordmark, white on gray |
-| `acp-devin` | Devin mark |
+| `acp-devin` | Official Devin symbol |
 | `acp-codexl` | OpenAI mark, white on gray to distinguish native Codex |
 | `acp-kiro` | Kiro mark |
 | `acp-agy` | Antigravity mark |
@@ -17,7 +17,7 @@ Other marks inherit BB's foreground color in light and dark themes; Amp and ACP 
 
 ## Install
 
-Requires BB 0.42 or newer and Plugin SDK 0.4.47 or newer. Install into the BB instance serving the UI:
+Requires BB 0.44 or newer and Plugin SDK 0.5.29 or newer. Install into the BB instance serving the UI:
 
 ```sh
 bb plugin install https://github.com/hxy91819/bb-plugin-acp-profile-icons --yes
@@ -45,7 +45,7 @@ bb plugin disable acp-profile-icons
 
 ## How it works
 
-`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon`. The SVGs are bundled locally; except for Amp's and ACP Codex's gray-and-white tiles, they inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
+`app.tsx` registers inline SVG components with `app.slots.experimental_providerIcon` and `providerKind: "agent"`. The SVGs are bundled locally; except for Amp's and ACP Codex's gray-and-white tiles, they inherit BB's text color. The backend entry is empty; this plugin does not change authentication, models, or agent execution.
 
 For BB 0.42's Provider Usage panel, a scoped content stylesheet supplies SVG masks (or two-color SVG images for Amp and ACP Codex). It leaves React-owned elements intact and removes the stylesheet on disable or reload. Newer BB versions may no longer need that selector; the model picker uses the provider-icon extension directly.
 

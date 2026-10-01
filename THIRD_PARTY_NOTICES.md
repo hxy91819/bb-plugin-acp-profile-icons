@@ -1,3 +1,6 @@
+Devin’s complete symbol is adapted from its official favicon:
+https://devin.ai/favicon.svg. The mark belongs to Cognition.
+
 # Third-party icon sources
 
 Kiro, Antigravity, GitHub Copilot, and DeepSeek SVG paths are adapted from

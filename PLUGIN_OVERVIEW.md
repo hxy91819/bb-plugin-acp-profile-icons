@@ -14,4 +14,4 @@ A scoped stylesheet also supplies matching logo masks and gray-tile images in th
 
 ## Requirements
 
-BB 0.42 or newer, Plugin SDK 0.4.47 or newer, and an existing matching ACP provider. There are no plugin settings or additional external services.
+BB 0.44 or newer, Plugin SDK 0.5.29 or newer, and an existing matching ACP provider. There are no plugin settings or additional external services.

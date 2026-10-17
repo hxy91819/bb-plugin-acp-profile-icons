@@ -1,3 +1,7 @@
+> Maintenance moved to [hxy91819/bb-plugins](https://github.com/hxy91819/bb-plugins/tree/main/plugins/acp-profile-icons). This repository preserves historical source and releases.
+>
+> New installations: `bb plugin install git:https://github.com/hxy91819/bb-plugins.git@main --plugin acp-profile-icons`. Existing installations: follow the [data-preserving migration instructions](https://github.com/hxy91819/bb-plugins/blob/main/docs/migration.md). Plugin ID `acp-profile-icons` is unchanged.
+
 # BB ACP Profile Icons
 
 A **BB-specific frontend plugin** that displays recognizable icons for ACP providers.
